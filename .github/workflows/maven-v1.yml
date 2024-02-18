@@ -39,7 +39,7 @@ jobs:
             echo "POM VERSION" ${MY_POM_VERSION}
             if [[ $MY_POM_VERSION =~ ^.*SNAPSHOT$ ]];
             then
-                ./mvnw -B -Dhttps.protocols=TLSv1.2 clean deploy
+                ./mvnw -B -Dhttps.protocols=TLSv1.2 clean
             else
                 echo "not deploying release: " ${MY_POM_VERSION}
             fi
