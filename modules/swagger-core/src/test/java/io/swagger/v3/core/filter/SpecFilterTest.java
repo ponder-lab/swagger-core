@@ -170,47 +170,46 @@ public class SpecFilterTest {
             }
         }
     }
-
+    
     @Test(description = "it should clone everything concurrently")
     public void cloneEverythingConcurrent() throws IOException {
+    	
     	int numThreads = 10;
+    	    	    	
         final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
 
-        ThreadGroup tg = new ThreadGroup("SpecFilterTest" + "|" + System.currentTimeMillis());
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
+        
+        Thread[] threads = new Thread[numThreads];
+        
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
-            new Thread(tg, "SpecFilterTest") {
-                public void run() {
-                    try {
-                        filteredMap.put("filtered " + id, new SpecFilter().filter(openAPI, new NoOpOperationsFilter(), null, null, null));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            threads[i] = Thread.ofVirtual().start(() -> {
+            	try {
+                    filteredMap.put("filtered " + id, new SpecFilter().filter(openAPI, new NoOpOperationsFilter(), null, null, null));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }.start();
+            });
         }
-
-        new Thread(new FailureHandler(tg, filteredMap, openAPI)).start();
+        Thread.ofVirtual().start(new FailureHandler(threads, filteredMap, openAPI));               
     }
 
     class FailureHandler implements Runnable {
-        ThreadGroup tg;
+    	Thread[] threads;
         Map<String, OpenAPI> filteredMap;
         private OpenAPI openAPI;
 
-        private FailureHandler(ThreadGroup tg, Map<String, OpenAPI> filteredMap, OpenAPI openAPI) {
-            this.tg = tg;
-            this.filteredMap = filteredMap;
+        private FailureHandler(Thread[] threads, Map<String, OpenAPI> filteredMap, OpenAPI openAPI) {
+            this.threads = threads;
+        	this.filteredMap = filteredMap;
             this.openAPI = openAPI;
         }
 
         @Override
         public void run() {
             try {
-                Thread[] thds = new Thread[tg.activeCount()];
-                tg.enumerate(thds);
-                for (Thread t : thds) {
+                for (Thread t : threads) {
                     if (t != null) {
                         t.join(10000);
                     }
