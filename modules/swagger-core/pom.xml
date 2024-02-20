@@ -10,9 +10,6 @@
     <artifactId>swagger-core</artifactId>
     <name>swagger-core</name>
     <description>swagger-core</description>
-    <properties>
-		<jmh.version>1.37</jmh.version>
-	</properties>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>install</defaultGoal>
@@ -254,5 +251,6 @@
         <coverage.complexity.minimum>0.60</coverage.complexity.minimum>
         <coverage.line.minimum>0.0</coverage.line.minimum>
         <coverage.missed.classes>3</coverage.missed.classes>
+    	<jmh.version>1.37</jmh.version>
     </properties>
 </project>
