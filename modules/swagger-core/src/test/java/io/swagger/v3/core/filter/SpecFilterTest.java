@@ -173,11 +173,12 @@ public class SpecFilterTest {
 
     @Test(description = "it should clone everything concurrently")
     public void cloneEverythingConcurrent() throws IOException {
+    	int numThreads = 10;
         final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
 
         ThreadGroup tg = new ThreadGroup("SpecFilterTest" + "|" + System.currentTimeMillis());
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numThreads; i++) {
             final int id = i;
             new Thread(tg, "SpecFilterTest") {
                 public void run() {
