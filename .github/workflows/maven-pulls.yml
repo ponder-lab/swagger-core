@@ -2,7 +2,7 @@ name: Build Test PR
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "fibers" ]
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 11, 14, 17 ]
+        java: [ 21 ]
 
     steps:
     - uses: actions/checkout@v2
