@@ -194,13 +194,14 @@ public class SpecFilterTest {
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
             threads[i] = Thread.ofVirtual().name("SpecFilterTest").start(() -> {
-            	try {
+                try {
                     filteredMap.put("filtered " + id, new SpecFilter().filter(openAPI, new NoOpOperationsFilter(), null, null, null));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
         }
+
         Thread.ofVirtual().start(new FailureHandler(threads, filteredMap, openAPI));
     }
 
@@ -211,7 +212,7 @@ public class SpecFilterTest {
 
         private FailureHandler(Thread[] threads, Map<String, OpenAPI> filteredMap, OpenAPI openAPI) {
             this.threads = threads;
-        	this.filteredMap = filteredMap;
+            this.filteredMap = filteredMap;
             this.openAPI = openAPI;
         }
 
