@@ -14,7 +14,7 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>install</defaultGoal>
         <plugins>
-			<plugin>
+	    <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <executions>
@@ -132,7 +132,7 @@
         </plugins>
     </build>
     <dependencies>
-		<dependency>
+	<dependency>
             <groupId>org.openjdk.jmh</groupId>
             <artifactId>jmh-core</artifactId>
             <version>${jmh.version}</version>
