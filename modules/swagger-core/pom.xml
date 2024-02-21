@@ -54,8 +54,8 @@
                                 <!-- <argument>-i</argument> -->
                                 <!-- <argument>1</argument> -->
                                 <!-- Warmup. -->
-                                <!-- <argument>-wi</argument> -->
-                                <!-- <argument>0</argument> -->
+                                <argument>-wi</argument>
+                                <argument>1</argument>
                                 <!-- Warmup mode. -->
                                 <!-- <argument>-wm</argument> -->
                                 <!-- <argument>BULK</argument> -->
