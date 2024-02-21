@@ -176,9 +176,8 @@ public class SpecFilterTest {
     	int numThreads = 10;
         final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
 
-        final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
-
         Thread[] threads = new Thread[numThreads];
+        final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
 
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
