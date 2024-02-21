@@ -33,7 +33,7 @@
                                 <argument>org.openjdk.jmh.Main</argument>
                                 <argument>.*</argument>
                                 <argument>-bm</argument>
-                                <argument>avgt</argument>
+                                <argument>all</argument>
                                 <argument>-f</argument>
                                 <argument>1</argument>
                                 <argument>-tu</argument>
