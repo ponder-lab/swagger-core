@@ -166,7 +166,7 @@
                 <version>3.6.2</version>
                 <configuration>
                     <aggregate>true</aggregate>
-                    <source>1.8</source>
+                    <source>21</source>
                     <encoding>UTF-8</encoding>
                     <maxmemory>1g</maxmemory>
                     <links>
@@ -418,7 +418,7 @@
                 <version>3.6.2</version>
                 <configuration>
                     <aggregate>true</aggregate>
-                    <source>1.8</source>
+                    <source>21</source>
                     <encoding>UTF-8</encoding>
                     <maxmemory>1g</maxmemory>
                     <debug>true</debug>
@@ -627,7 +627,7 @@
         </dependencies>
     </dependencyManagement>
     <properties>
-        <maven.compiler.release>8</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <joda-version>2.2.3</joda-version>
         <joda-time-version>2.12.5</joda-time-version>
         <snakeyaml-version>2.2</snakeyaml-version>
