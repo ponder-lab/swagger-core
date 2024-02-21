@@ -177,8 +177,8 @@ public class SpecFilterTest {
 
     @Setup(Level.Trial)
     public void setUp() throws IOException {
-	// RK: Move I/O outside the benchmark to reduce variability.
-	openAPI = getOpenAPI(RESOURCE_PATH);
+        // RK: Move I/O outside the benchmark to reduce variability.
+        openAPI = getOpenAPI(RESOURCE_PATH);
     }
 
     // @Param({"10", "100", "1000"})
@@ -206,7 +206,7 @@ public class SpecFilterTest {
     }
 
     class FailureHandler implements Runnable {
-    	Thread[] threads;
+        Thread[] threads;
         Map<String, OpenAPI> filteredMap;
         private OpenAPI openAPI;
 
