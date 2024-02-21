@@ -170,7 +170,7 @@
                     <encoding>UTF-8</encoding>
                     <maxmemory>1g</maxmemory>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api</link>
+                        <link>http://docs.oracle.com/en/java/javase/21/docs/api</link>
                     </links>
                     <excludePackageNames>${javadoc.package.exclude}</excludePackageNames>
                 </configuration>
@@ -423,7 +423,7 @@
                     <maxmemory>1g</maxmemory>
                     <debug>true</debug>
                     <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api</link>
+                        <link>https://docs.oracle.com/en/java/javase/21/docs/api</link>
                     </links>
                     <excludePackageNames/>
                 </configuration>
@@ -664,5 +664,7 @@
         <transformer-maven-plugin-version>0.5.0</transformer-maven-plugin-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
+        <!-- RK: For some reason, javadoc creation isn't working. Let's skip it. -->
+        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 </project>

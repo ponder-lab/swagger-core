@@ -26,6 +26,7 @@ import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.tags.Tag;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
+import org.openjdk.jmh.annotations.*;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -41,6 +42,7 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+@State(Scope.Benchmark)
 public class SpecFilterTest {
 
     private static final String RESOURCE_RECURSIVE_MODELS = "specFiles/recursivemodels.json";
@@ -171,11 +173,21 @@ public class SpecFilterTest {
         }
     }
 
-    @Test(description = "it should clone everything concurrently")
-    public void cloneEverythingConcurrent() throws IOException {
-    	int numThreads = 10;
-        final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
+    private OpenAPI openAPI;
 
+    @Setup(Level.Trial)
+    public void setUp() throws IOException {
+	// RK: Move I/O outside the benchmark to reduce variability.
+	openAPI = getOpenAPI(RESOURCE_PATH);
+    }
+
+    // @Param({"10", "100", "1000"})
+    @Param({"10"})
+    private int numThreads;
+
+    @Test(description = "it should clone everything concurrently")
+    @Benchmark
+    public void cloneEverythingConcurrent() throws IOException {
         Thread[] threads = new Thread[numThreads];
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
 
