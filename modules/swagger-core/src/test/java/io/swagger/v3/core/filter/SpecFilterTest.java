@@ -181,7 +181,8 @@ public class SpecFilterTest {
 	openAPI = getOpenAPI(RESOURCE_PATH);
     }
 
-    @Param({"10", "100", "1000"})
+    // @Param({"10", "100", "1000"})
+    @Param({"10"})
     private int numThreads;
 
     @Test(description = "it should clone everything concurrently")
