@@ -173,9 +173,7 @@ public class SpecFilterTest {
 
     @Test(description = "it should clone everything concurrently")
     public void cloneEverythingConcurrent() throws IOException {
-
     	int numThreads = 10;
-
         final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
 
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
