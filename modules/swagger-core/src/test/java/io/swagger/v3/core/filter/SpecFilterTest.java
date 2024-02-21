@@ -177,8 +177,8 @@ public class SpecFilterTest {
 
     @Setup(Level.Trial)
     public void setUp() throws IOException {
-	// RK: Move I/O outside the benchmark to reduce variability.
-	openAPI = getOpenAPI(RESOURCE_PATH);
+        // RK: Move I/O outside the benchmark to reduce variability.
+        openAPI = getOpenAPI(RESOURCE_PATH);
     }
 
     // @Param({"10", "100", "1000"})
