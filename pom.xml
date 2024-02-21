@@ -664,5 +664,7 @@
         <transformer-maven-plugin-version>0.5.0</transformer-maven-plugin-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
+        <!-- RK: For some reason, javadoc creation isn't working. Let's skip it. -->
+        <maven.javadoc.skip>true</maven.javadoc.skip>
     </properties>
 </project>
