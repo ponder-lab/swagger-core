@@ -32,28 +32,33 @@
                                 <classpath />
                                 <argument>org.openjdk.jmh.Main</argument>
                                 <argument>.*</argument>
+                                <!-- Measurement mode. -->
                                 <argument>-bm</argument>
                                 <argument>all</argument>
+                                <!-- Forks. -->
                                 <argument>-f</argument>
                                 <argument>1</argument>
+                                <!-- Units. -->
                                 <argument>-tu</argument>
                                 <argument>ms</argument>
+                                <!-- Machine-readible output. -->
                                 <argument>-rff</argument>
                                 <argument>jmh-results.csv</argument>
+                                <!-- Human-readable output. -->
                                 <argument>-o</argument>
                                 <argument>jmh-results.txt</argument>
-                                <!-- Only one iteration for now. -->
-                                <argument>-i</argument>
-                                <argument>1</argument>
                                 <!-- Fail on error. -->
                                 <argument>-foe</argument>
                                 <argument>true</argument>
-                                <!-- No warmup for now. -->
-                                <argument>-wi</argument>
-                                <argument>0</argument>
-                                <!-- Do a batch warmup. -->
-                                <argument>-wm</argument>
-                                <argument>BULK</argument>
+                                <!-- Iterations. -->
+                                <!-- <argument>-i</argument> -->
+                                <!-- <argument>1</argument> -->
+                                <!-- Warmup. -->
+                                <!-- <argument>-wi</argument> -->
+                                <!-- <argument>0</argument> -->
+                                <!-- Warmup mode. -->
+                                <!-- <argument>-wm</argument> -->
+                                <!-- <argument>BULK</argument> -->
                             </arguments>
                         </configuration>
                     </execution>
