@@ -173,12 +173,20 @@ public class SpecFilterTest {
         }
     }
 
+    private OpenAPI openAPI;
+
+    @Setup(Level.Trial)
+    public void setUp() throws IOException {
+	// RK: Move I/O outside the benchmark to reduce variability.
+	openAPI = getOpenAPI(RESOURCE_PATH);
+    }
+
+    @Param({"10", "100", "1000"})
+    private int numThreads;
+
     @Test(description = "it should clone everything concurrently")
     @Benchmark
     public void cloneEverythingConcurrent() throws IOException {
-    	int numThreads = 10;
-        final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
-
         ThreadGroup tg = new ThreadGroup("SpecFilterTest" + "|" + System.currentTimeMillis());
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
         for (int i = 0; i < numThreads; i++) {
