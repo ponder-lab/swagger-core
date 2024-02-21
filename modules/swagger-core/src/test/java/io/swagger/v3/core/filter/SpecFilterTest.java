@@ -181,7 +181,7 @@ public class SpecFilterTest {
 
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
-            threads[i] = Thread.ofVirtual().start(() -> {
+            threads[i] = Thread.ofVirtual().name("SpecFilterTest").start(() -> {
             	try {
                     filteredMap.put("filtered " + id, new SpecFilter().filter(openAPI, new NoOpOperationsFilter(), null, null, null));
                 } catch (Exception e) {
