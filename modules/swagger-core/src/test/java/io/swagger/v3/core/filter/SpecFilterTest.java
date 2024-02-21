@@ -170,18 +170,18 @@ public class SpecFilterTest {
             }
         }
     }
-    
+
     @Test(description = "it should clone everything concurrently")
     public void cloneEverythingConcurrent() throws IOException {
-    	
+
     	int numThreads = 10;
-    	    	    	
+
         final OpenAPI openAPI = getOpenAPI(RESOURCE_PATH);
 
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
-        
+
         Thread[] threads = new Thread[numThreads];
-        
+
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
             threads[i] = Thread.ofVirtual().start(() -> {
@@ -192,7 +192,7 @@ public class SpecFilterTest {
                 }
             });
         }
-        Thread.ofVirtual().start(new FailureHandler(threads, filteredMap, openAPI));               
+        Thread.ofVirtual().start(new FailureHandler(threads, filteredMap, openAPI));
     }
 
     class FailureHandler implements Runnable {
