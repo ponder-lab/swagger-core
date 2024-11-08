@@ -187,31 +187,30 @@ public class SpecFilterTest {
     @Test(description = "it should clone everything concurrently")
     @Benchmark
     public void cloneEverythingConcurrent() throws IOException {
-        ThreadGroup tg = new ThreadGroup("SpecFilterTest" + "|" + System.currentTimeMillis());
+        Thread[] threads = new Thread[numThreads];
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
+
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
-            new Thread(tg, "SpecFilterTest") {
-                public void run() {
-                    try {
-                        filteredMap.put("filtered " + id, new SpecFilter().filter(openAPI, new NoOpOperationsFilter(), null, null, null));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            threads[i] = Thread.ofVirtual().name("SpecFilterTest").start(() -> {
+                try {
+                    filteredMap.put("filtered " + id, new SpecFilter().filter(openAPI, new NoOpOperationsFilter(), null, null, null));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }.start();
+            });
         }
 
-        new Thread(new FailureHandler(tg, filteredMap, openAPI)).start();
+        Thread.ofVirtual().start(new FailureHandler(threads, filteredMap, openAPI));
     }
 
     class FailureHandler implements Runnable {
-        ThreadGroup tg;
+        Thread[] threads;
         Map<String, OpenAPI> filteredMap;
         private OpenAPI openAPI;
 
-        private FailureHandler(ThreadGroup tg, Map<String, OpenAPI> filteredMap, OpenAPI openAPI) {
-            this.tg = tg;
+        private FailureHandler(Thread[] threads, Map<String, OpenAPI> filteredMap, OpenAPI openAPI) {
+            this.threads = threads;
             this.filteredMap = filteredMap;
             this.openAPI = openAPI;
         }
@@ -219,9 +218,7 @@ public class SpecFilterTest {
         @Override
         public void run() {
             try {
-                Thread[] thds = new Thread[tg.activeCount()];
-                tg.enumerate(thds);
-                for (Thread t : thds) {
+                for (Thread t : threads) {
                     if (t != null) {
                         t.join(10000);
                     }
