@@ -189,7 +189,6 @@ public class SpecFilterTest {
     public void cloneEverythingConcurrent() throws IOException {
         Thread[] threads = new Thread[numThreads];
         final Map<String, OpenAPI> filteredMap = new ConcurrentHashMap<>();
-
         for (int i = 0; i < numThreads; i++) {
             final int id = i;
             threads[i] = Thread.ofVirtual().name("SpecFilterTest").start(() -> {
